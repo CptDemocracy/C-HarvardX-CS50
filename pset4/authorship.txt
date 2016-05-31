@@ -1,0 +1,27 @@
+My work includes the following units of code:
+
+FILE: pset4/questions.txt
+
+FILE: pset4/jpg/recover.c
+CODE UNITS:
+- int main(int argc, char* argv[]);
+
+FILE: pset4/bmp/whodunit.c
+CODE UNITS:
+- int main(int argc, char* argv[]);
+- LONG isPixelGreen(const RGBTRIPLE* const rgb);
+- LONG makePixelBlue(RGBTRIPLE* const rgb);
+- LONG isPixelRed(const RGBTRIPLE* const rgb);
+- LONG makePixelWhite(RGBTRIPLE* const rgb);
+
+FILE: pset4/bmp/showBmph.c
+CODE UNITS:
+- int main(int argc, char** argv);
+
+FILE: pset4/bmp/resize.c
+CODE UNITS:
+- int main(int argc, char** argv);
+
+COMMENT:
+The prototypes for the following code units were supplied with the PSET specification, 
+however the actual code was written by me:
