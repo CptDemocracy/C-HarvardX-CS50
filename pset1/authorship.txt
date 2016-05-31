@@ -1,19 +1,19 @@
 My work includes the following units of code:
 
-FILE: greedy/greedy.c
+FILE: pset1/greedy/greedy.c
 CODE UNITS:
 - int calculateMinCoinCountForChangeUSD(float changeOwedUsd);
 
-FILE: hello/hello.c
+FILE: pset1/hello/hello.c
 CODE UNITS:
-- int main(void);
+- int main(int argc, char** argv);
 
-FILE: mario/mario.c
+FILE: pset1/mario/mario.c
 CODE UNITS:
 - void drawPyramid(char block, int height);
-- int main(void);
+- int main(int argc, char** argv);
 
-FILE: water/water.c
+FILE: pset1/water/water.c
 CODE UNITS:
 - int GetPositiveInt(void);
-- int main(void);
+- int main(int argc, char** argv);
