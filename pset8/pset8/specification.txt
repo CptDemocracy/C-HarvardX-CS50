@@ -1,0 +1,26 @@
+PROBLEM SPECIFICATION:
+
+For this PSET, I was required to write a command-line
+script in PHP in "import", that accepts as a command-line
+argument the path to a file (the file assumed to be downloaded
+from download.geonames.org/export/zip, for this problem, it was
+the database of the US geonames), iterate over the file's lines,
+inserting each as new row to the "places" MySQL table.
+
+I was then required to implement search.php in such a way that it
+outputs a JSON array of objects, each of which represents a row
+from the "places" MySQL table, that matches the value of "geo" which
+is a GET parameter passed into search.php.
+
+Afterwards, I had to do a little front-end JS-scripting and modify 
+the "configure" function so that the function properly lists geonames 
+on the map, implement functions "addMarker", "hideInfo", "removeMarkers",
+"search", "showInfo" and "update", which would provide front-end information
+and list news in every specific locale, based on the back-end provided by
+the CS50. 
+
+My last assignment for this PSET was to add my "personal touch" to the
+website. I chose this to be the "MyPlaces" and "Like" features, which 
+would enable users to add their favorite places to their MyMaps collection 
+by liking them on the main map (powered by Google Maps) on the index page. 
+News will also be neatly displayed for users on their "MyPlaces" page.
