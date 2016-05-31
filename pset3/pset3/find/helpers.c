@@ -71,16 +71,14 @@ void sort(int values[], int n)
         h = multiplier * h + 1;
     }
     
-	while (h > 0) {
-	    
-		for (int i = h; i < n; i += h) {
-			for (int j = i; j - h >= 0 && values[j] < values[j - h]; j -= h) {
-				int temp      = values[j];
-				values[j]     = values[j - h];
-				values[j - h] = temp;
-			}			
-		}
-		
-		h /= multiplier;
-	}
+    while (h > 0) {
+        for (int i = h; i < n; i += h) {
+            for (int j = i; j - h >= 0 && values[j] < values[j - h]; j -= h) {
+                int temp      = values[j];
+                values[j]     = values[j - h];
+                values[j - h] = temp;
+            }            
+        }
+        h /= multiplier;
+    }
 }
