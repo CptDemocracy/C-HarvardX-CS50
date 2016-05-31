@@ -4,11 +4,11 @@
 #include <ctype.h>
 #include "cs50.h"
 
-#define ARGC_COUNT_INT            2
+#define ARGC_COUNT_INT                2
 #define CHAR_BUFFER_LENGTH_INT        256
-#define BUFFER_OVERFLOW_MSG_CSTR    "Character buffer encountered an overflow.\n"
+#define BUFFER_OVERFLOW_MSG_CSTR      "Character buffer encountered an overflow.\n"
 #define INVALID_INPUT_MSG_CSTR        "The syntax of the command is incorrect. Please use ./caesar /? for help\n"
-#define OUTPUT_HELP_CMD_CSTR        "/?"
+#define OUTPUT_HELP_CMD_CSTR          "/?"
 
 int  encrypt_ascii_caesar(char*, char*, int, int);
 /**
