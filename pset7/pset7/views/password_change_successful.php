@@ -1,0 +1,1 @@
+<div class="jumbotron">Your password has been changed successfully.</div>
