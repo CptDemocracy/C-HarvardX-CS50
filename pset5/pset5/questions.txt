@@ -1,0 +1,237 @@
+0.  Q: What is pneumonoultramicroscopicsilicovolcanoconiosis?
+    A: Longest word in the English dictionary according to Wikipedia and, quite frankly, which on top of it 
+       sounds uber evil. Looks like Emperor Palpatine is not the most evil in the Universe, after all!
+    
+1.  Q: According to its man page, what does getrusage do?
+    A: TLDR. Nah, only joking! Here's what it does. Basically getrusage returns an object of type rusage which
+       represents various counters that enable us to collect system statistics and analyze our applications'
+       performance. 
+       
+       getrusage takes two arguments, an integer representing who we want stats for (that can be either of
+       RUSAGE_SELF, RUSAGE_CHILDREN, RUSAGE_THREAD). The second argument is a pointer to an object of type
+       rusage that stats will be saved to.
+    
+2.  Q: Per that same man page, how many members are in a variable of type struct rusage?
+    A: 16, 7 of them are not maintained on Linux OS. 14 member variables are of type long and 2 of them are of
+       type timeval - one contains data about user CPU time used while the other contains data about system CPU
+       time. These 2 are of primary interest to us for this PSET since they enable us to benchmark our speller.
+    
+3.  Q: Why do you think we pass before and after by reference (instead of by value) to calculate, 
+       even though we’re not changing their contents?
+    A: We pass rusage objects "before" and "after" by reference so that function's activation record will contain
+       direct addresses of the objects without having to copy them. If we didn't pass them by a reference, we 
+       would be making redundant copies of the objects we only wanted to extract information from.
+    
+4.  Q: Explain as precisely as possible, in a paragraph or more, how main goes about reading words 
+       from a file. In other words, convince us that you indeed understand how that function’s for loop works.
+    A: To illustrate the behavior of the for loop, I will first present just a little bit of pseudocode:
+    
+        traverse chars till EOF is encountered
+        if char is alpha or '\'', add to buffer
+        	if buffer full, keep traversing until either EOF or not alpha char BUT do not add char to the buffer
+        		reset the buffer
+        if char is digit, keep traversing until EOF or not alnum char BUT do not add to the buffer
+        	reset the buffer (set index to 0)
+        at this point we must've found the whole world, index > 0 (make sure the buffer is not empty)
+        	check if misspelled
+        		increment the misspellings counter
+        	update the benchmark
+        	reset the buffer (set index to 0)
+        	
+        Basically, we traverse all the characters inside the text until we encounter an EOF. Inside the loop
+        resides our primary so-called "buffer-handling" logic where we eliminate all non-alpha and non-'/' chars
+        by simply ignoring them and resetting the buffer each time one of those invalid characters is encountered.
+        By resetting the buffer we want to say that we reset the counter "index" to 0.
+        
+        If prior to encountering a non-alpha and non-'/' char we already had a few valid (alpha) chars in the buffer,
+        we reset the buffer and skip all the alpha-numeric characters and stop if we encounter an EOF. A new line
+        character is a non-alpha-numeric character, hence this inner loop terminates.
+        
+        We now proceed to the condition that checks whether the buffer was reset. If the buffer was not reset, the
+        counter "index" will be within (0, LENGTH] range. We then proceed to check if the word is misspelled or not
+        using our check(...) function, which at this point is also benchmarked. If the word was indeed misspelled, 
+        (i.e. not in the dictionary), we increment the "misspellings" counter and start (or not if we hit an EOF)
+        the next cycle of the loop until an EOF is encountered.
+    
+5.  Q: Why do you think we used fgetc to read each word’s characters one at a time rather than use fscanf with a 
+       format string like "%s" to read whole words at a time? Put another way, what problems might arise by relying 
+       on fscanf alone?
+    A: fscanf is evil. fscanf is dangerous. fscanf is wanted in Dodge City for $100 000. If you have seen fscanf
+       within 500 miles of your home, stay away from the windows, lock all the doors, notify the authorities, duck
+       and cover. The main problem with fscanf is that it indiscriminately overwrites memory whenever given such 
+       opportunity. 
+       
+       Example:
+       
+        char buffer[1];
+        fscanf(stdin, "%s", buffer);
+        // buffer will only take an empty string, since it only has enough memory to contain the
+        // null-terminating character. If we enter anything, our old friend segfault is coming 
+        // to get us! Or not. The worst case scenario here is if we do not segfault, since we have
+        // corrupted the memory we probably needed anyway and were not informed about it.
+    
+       fgetc is a much much safer approach. With fgetc we read each character, test if it's the end of the file yet,
+       and if it is, we just return. With fgetc we have control over how much we read whereas with fscanf and its
+       friends (e.g. scanf) there are no guarantees at all. In Computer Science, if something can go wrong, it will
+       go wrong!
+    
+6.  Q: Why do you think we declared the parameters for check and load as const?
+    A: It's a good programming style to declare parameters which should not undergo any mutations inside the callee
+       as const. Especially with char*. We, as clients, don't want callees to do something funny with the objects
+       we pass to them when the callee specification clearly states that no side effects and/or mutations should be
+       produced. It also enables a compile-time check which helps the programmer of the callee function not alter
+       any of its arguments' values by accident.
+    
+7.  Q: What data structure(s) did you use to implement your spell-checker? Be sure not to leave your answer at just 
+       "hash table," "trie," or the like. Expound on what’s inside each of your "nodes."
+    A: For this problem, I chose to implement a hash table. Even though a trie seemed interesting and exotic at first, 
+       I decided to go with a hash table for the following reasons:
+       
+        - better familiary with the concepts underlying hash table's inner workings
+        - graphic example of a hash table inside .NET Framework library which I've been consulting on various subjects
+          before.
+        - hash table has a time complexity of O(n) and a trie has an O(mn) where m is the number of characters in a string.
+          Best case time complexity for a hash table is Omega(1) and for a trie Omega(m).
+        Below I list the disadvantages of my decision:
+        - a trie would potentially consume less memory
+        - a trie could potentially be faster but performance of a hash table can be enhanced by a better hashing function.
+        
+        One of the biggest challenges for me was implementing a generic hash table, memory management in particular. The
+        implementation of HashSetEnsureCapacity, perhaps, took a bite of 70% of my time. And then 80% of time it took 
+        to implement HashSetEnsureCapacity was actually this "one-liner-crash-everything-and-leak-all-memory-and-hate-on-cute-kittens"
+        bug hunt. I was passing a size of the contained element instead of sizeof(Slot*) on line 246 of HashSet.c. I swear
+        it was an oversight! Worked fine for ints, but left me scratching my head to why would EnsureCapacity overwrite memory.
+        
+        So here's how it works. When we first initialize a hash set, we must pass it the size of an element we want it to contain. 
+        Optionally we can pass it a hash function that takes two parameters (address to an item and its element size) or NULL.
+        If NULL is passed as a second argument to HashSetNew(...), the hash set will use the default hashing function. 
+        
+        I wrote the hashing function for it myself by analyzing how hash functions for doubles and longs were implemented in .NET 
+        and JDK. At first my design for the hash function was flawed. I used malloc for buffer allocation (no way I could allocate
+        on the stack, since the function had to dynamically calculate a buffer size which would be a multiple of elemSize), and 
+        malloc'ed space has garbage values in it. The functions would then XOR sizeof(int) chunks. If a chunk was not occupied
+        by the item's bytes, it provided a garbage value to the XOR and mutate the hashCode in subtle ways. Ultimately, it would
+        mean that two same objects would have different hash codes. This was solved by replacing malloc with calloc which zeroed
+        out all bytes before using that memory. I wish I could throw in some hashing-related buzz-words on top of it here but alas.
+        
+        The HashSetNew function originally had the third argument to pass dispose function pointers if a contained item required 
+        any sort of special treatment during de-allocation. This function pointer would then be passed to the Slot objects, since
+        the Slot objects are actually the ones responsible for containing their items. Apart from giving me headaches during re-
+        hashing at the outset of development, it was also rejected by the compiler and/or warned against due to me passing, say,
+        "void SlotDispose(Slot*)" to a "void (*dispose)(void*)", so I had to drop it. I also got this idea that it might also
+        be dangerous and potentially create security holes, which I can't really elaborate much on due to lack of understanding
+        at this time.
+        
+        HashSet makes shallow copies of items it contains. So unless a client is passing it dynamically allocated objects which
+        contain pointers to other dynamically allocated instances, which absolutely require special treatment during deallocation 
+        process, clients will not experience any memory leaks if they rely solely on HashSetDispose to deallocate memory used by
+        the hash table. If they do, however, they will have to clean up the memory themselves, unfortunately.
+        
+        When we call HashSetAddItem(...) Hash table uses a hash function default or client-provided that hashes the item that was 
+        passed to it and checks if it's already in the table. If it is, it returns false, if not, HashSetEnsureCapacity is called
+        to check whether the hash table has enough memory to accommodate an extra item. 
+        
+        At this point, if there is not enough memory, it then calls a .NET-ported expandPrime function defined in the PrimeHelper.h,
+        to calculate how much space we need. The number of items a hash set can accommodate at any point of time is always a prime 
+        number. The nature of prime numbers allows us to decrease the number of collisions and improve the hash table's performance.
+        After we have our prime number, we allocate more space and re-hash.
+        
+        The re-hashing process implies we "juggle" each Slot (representing an entry) to a larger newly-allocated space, which is
+        a must to avoid clustering. We dispose of the old buckets (represented by List objects) but hold on to the Slot objects
+        to avoid redundant object copying. We then reallocate Slots based on the hash codes of objects they contain. Basically,
+        re-hashing is like adding all the contained objects inside the smaller hash table to a larger hash table, except that we
+        do it inside one hash table.
+        
+        Once we are confident we have enough memory, we then create a Slot object which will hold our item, its size and the hash code.
+        Having the Slot hold then element size might seem redundant, but on the other hand adheres nicely to the principle of modularity
+        and relative independence, so to speak.
+        
+        HashSetContains calculates the hash code of the item whose address was passed to it and based on the hash which will always
+        be converted to an unsigned integer type (size_t) we locate the bucket by formula:
+        
+        bucketIndex = hashCode % capacity
+        
+        If it's NULL, we return false, if it is occupied by a bucket, we go ahead and traverse all of the collided buckets at this
+        positions and compare items face to face using memcmp. If we locate the item, we return false, if not - we return false.
+        
+        We then use HashSetDispose to free all memory occupied by a HashSet. Again, the objects clients passed to the hash table are
+        safe since this implementation makes shallow copies of them. If a client is passing objects which require a deep copy, they
+        will have to free memory themselves.
+    
+8.  Q: How slow was your code the first time you got it working correctly?
+    A: I can't quite recall the first time because of some issues I experienced with reading from file, which ultimately
+       led me to loading an extra word (which, of course, didn't exist) and showed at least 30% more misspelled words 
+       (in austinpowers.txt) than there actually were. I believe it was 0.36 seconds at least.
+       
+       When I fixed that, in total the program now took only 0.30 seconds.
+       
+       After I tweaked it to pre-calculate memory for the hash table, I was able to make it 0.05 seconds faster,
+       resulting in 0.25 seconds.
+       
+9.  Q: What kinds of changes, if any, did you make to your code in order to improve its performance?
+    A: The following changes were made:
+    
+       1.   Originally, I didn't make use of the HashSetEnsureCapacity function after creating a new hash table with HashSetNew.
+            I then opted to calculating a rough estimate of how many words should be contained, based on the dictionary file size 
+            based on a formula:
+            
+                fileSize / AVERAGE_WORD_LENGTH
+            
+            where I defined AVERAGE_WORD_LENGTH (a macro) to be 10 and pre-allocated memory inside the hashtable by calling
+            HashSetEnsureCapacity(...) after the .ctor (HashSetNew) call.
+            
+        2.  Originally, the HashSetEnsureCapacity function would create copies of the Slots and destroy the old ones Slots
+            during re-hashing process. This was redundant and inefficient. Instead, I chose to pass addresses to the Slots
+            to the newly allocated bucket list.
+            
+        3.  I ran a few experiments with various hash functions and chose to stay with my own implementation. I tried to tweak
+            it to no avail. The smallest bucket to entry ratio I managed to get was 9/14 or 0.64.
+            
+        4.  getPrime() function that I ported from .NET library utilized a linear search function when it searched for a prime
+            number within [3, 7199369] range which I replaced with a binary search algorithm winning me extra 0.02 sec. I also
+            discovered and fixed a bug where PRIME_ARRAY_LENGTH_INT was 73 while only having 72 numbers in the PRIME_ARRAY. How
+            did it get there in the first place? Well, it was originally 72 elements long and I then added number 2 to the 
+            PRIME_ARRAY since it is prime as well and it seemed logical for it to be in the array. Later, when I decided to 
+            remove 2 for performance reasons, I forgot to decrement PRIME_ARRAY_LENGTH_INT. It's all good now though!
+            
+       In the end I managed to get a 26.7% performance increase.
+    
+10. Q: Do you feel that your code has any bottlenecks that you were not able to chip away at?
+    A: There's no place more unpredictable than computer science, you might think financial market is, but at least
+       they don't have to look for bugs not limited to the classic "off by one" and/or "one-liner-crash-everything"
+       type of bug. 
+       
+       It was my first implementation of a hash table and prior to actually implementing it I did some research
+       of the HashSet class in .NET Framework library, which can be found here:
+       
+       http://referencesource.microsoft.com/System.Core/System/Collections/Generic/HashSet.cs.html
+       
+       I am fairly confident that had I better familiarity with calculus and advanced math (never got past the 20th
+       page of Knuth's "The Art of Computer Programming Vol. 1"), it would enable me to tweak the hash table in much
+       more subtle and efficient ways.
+       
+       I tested my hash function against the hash function which can be found here at line 789 by bucket-to-entry ratio:
+       
+       http://referencesource.microsoft.com/#mscorlib/system/string.cs
+       
+       You can still find trace of the test at the bottom of HashSet.c whereby defining a HASH_SET_BUCKET_COUNT macro,
+       you could enable the HashSetGetBucketCount function that counts the number of buckets in the hashtable. (This, 
+       unlike HashSetGetCount, returns the actual number of buckets minus collisions. For example if we had two entries
+       and HashSetGetBucketCount returned 1, that would mean we had one collision - both entries are inside of 1 bucket).
+       
+       Surprisingly, (I don't mean to brag) my hash function performed slightly better for this assignment. Both hash
+       functions returned 93000> buckets to 143091 entries, however .NET function was about 200 buckets behind, thus
+       meaning a few more collisions.
+       
+       Originally the load function had no call to HashSetEnsureCapacity, that in turn caused extra overhead for hash
+       table resizing and re-hashing. By making a rough estimate of the dictionary file size and pre-allocating enough
+       memory, I managed to speed it up by 0.05 sec.
+       
+       Hopefully, an expert could comment on the implementation and give a few hints on how it could be improved.
+       
+       UPDATE:
+       
+       Magic! I have re-run the program and now it benchmarked at 0.19 sec for the total run of the program. Did I do
+       anything? Hardly. Average is still at around 0.23 sec.
+       
+       Oh and now it even went down to 0.18 sec.
