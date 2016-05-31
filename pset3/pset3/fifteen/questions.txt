@@ -1,0 +1,24 @@
+questions.txt
+
+Computer Science 50
+Problem Set 3
+
+1.  Q:  Besides 4 × 4 (which are Game of Fifteen’s dimensions), what other dimensions does the framework allow?
+    A:  The framework allows dimensions of x × x, where x is in [3, 9]. (3 <= x <= 9)
+
+
+2.  Q:  With what sort of data structure is the game’s board represented?
+    A:  The game's board is represented with a data structure called multidimensional array. Multidimensional
+        arrays are similar to jagged arrays in C# and Java, the main difference being, however, jagged arrays
+        are arrays of arrays and can have a varying number of columns in inner arrays, which is unacceptable
+        for a multidimensional array. In C, implementation of both is possible.
+
+
+3.  Q:  What function is called to greet the player at game’s start?
+    A:  The greet() function is called to greet the player, which in turn calls clear(), printf() and usleep()
+        functions.
+
+
+4.  Q:  What functions do you apparently need to implement?
+    A:  The following functions have to be implemented: 
+        init(), draw(), move(), won()

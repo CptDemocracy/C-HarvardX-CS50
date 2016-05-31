@@ -1,0 +1,115 @@
+0.  Q: How many different colors does each format support?
+    A: GIF supports up to 256 colors (2^8 - 8 bits to store color information). JPEG supports up to 
+       16 777 216 colors (2^24 - 24 bits to store color information or 3 bytes per pixel) and PNG32 being
+       (4 294 967 296 - 2^32 - 32 bits or 4 bytes (1 DWORD) to store color information). Unlike JPEG,
+       which only stores 3 bytes of color information to represent Red, Green and Blue, PNG32 actually
+       stores the 4th byte of data to preserve the color's "alpha" channel, also known as transparency.
+       Both PNG32 and GIF, however, support transparency. It's also important to mention that PNG24 for
+       RGB color and PNG8 for indexed color are available, which support smaller palettes. Indexed color, for
+       instance, regardless of the image format, can only offer 12 bits to store the color index array.
+    
+1.  Q: Which of the formats supports animation?
+    A: GIF is the only image format, as opposed to the PNG and JPEG images, that supports animation. Even 
+       though it's of poorer quality compared to Adobe Flash (previously known as Macromedia Flash) (.swf) 
+       animation.
+    
+2.  Q: What’s the difference between lossy and lossless compression?
+    A: Lossy compression is the type of compression which causes irrevocable data loss (degeneration). This
+       means that there will be no way to bring back a file compressed with a lossy compression algorithm to
+       its original quality. Lossy compression algorithms are typically used in situations where such data
+       loss is acceptable and/or the file has a high entropy (most bits contain different information values)
+       and the only way to compress is to use certain heuristics to predict data change (as in videos, for
+       example). JPEG uses a lossy compression algorithm. 
+       Lossless compression algorithms allow us to compress data with minimum to zero information loss. This
+       is usually applicable in cases where target files have low entropy and bit patterns are well predictable.
+       GZIP, for instance, uses a lossless compression algorithm. Among image formats, GIF and PNG make use of
+       lossless compression algorithms.
+    
+3.  Q: Which of these formats is lossy-compressed?
+    A: JPEG image format is generally lossy-compressed. However, according to the Wikipedia article, it is
+       possible to make certain changes to a JPEG image losslessly. If this wasn't the case, JPEG images would
+       suffer greatly from what's known as a "generation loss", when image irrevocably loses quality with
+       each subsequent transcoding (conversion from one encoding to another).
+    
+4.  Q: What happens, technically speaking, when a file is deleted on a FAT file system?
+    A: The operating system is signaled of the memory that it can now reclaim and the address of the file is
+       added to the free list. However, data at that address is not sanitized and is still valid. Even formatting
+       won't completely remove the data. The research conducted by Simson Garfinkel and Abhi Shelat showed that
+       formatting a drive and reinstalling the operating system on the same drive will only corrupt/sanitize a small
+       margin of the "deleted" data. That in turn means we can still access that memory if we know the address.
+       A good example in C programming world could be so-called "channelling" when we could use two subsequent 
+       calls to function that have their variables and their types in the same manner to gain access to the memory 
+       allocated on the stack for the stack frame which we are not legally authorized to access. This is especially 
+       true of the GNU compiler, not so much for the Visual C++ compiler which obfuscates data on the stack once the 
+       function exits. Such memory exploitation can be reminiscent of the usage of static variables inside of C++ 
+       functions.
+    
+5.  Q: What can someone like you do to ensure (with high probability) that files you delete cannot be recovered?
+    A: The research carried out by Simson Garfinkel and Abhi Shelat points to a few sanitization techniques we 
+       could use to completely remove data. Either physically removing the drive and or overwriting data with certain
+       patterns or pretty much any values. The use of applying patterns during overwriting is debatable. If I had to
+       ensure with high probability that files I delete cannot be recovered, I'd resort to physically destroying the
+       drive, since reportedly by applying certain techniques, even overwritten data regions can be restored to their
+       previous state.
+    
+6.  Q: What’s stdint.h?
+    A: A library introduced by the C99 standard, that defines additional integer types to
+       enhance portability of the C code, mainly written for embedded environments.
+    
+7.  Q: What’s the point of using uint8_t, uint32_t, int32_t, and uint16_t in a program?
+    A: Usage of these types enhanced portability of the C code by providing macros that
+       may be used across various domains. Their underlying values may vary from system
+       to system without affecting the code.
+    
+8.  Q: How many bytes is a BYTE, a DWORD, a LONG, and a WORD, respectively?
+    A: 8, 32, 16
+    
+9.  Q: What (in ASCII, decimal, or hexadecimal) must the first two bytes of any BMP file be? (Leading bytes used to identify file formats (with high probability) are generally called "magic numbers.)"
+    A: 0x42 and 0x4d - 'B' and 'M' respectively.
+    
+10. Q: What’s the difference between bfSize and biSize?
+    A: BITMAPFILEHEADER::bfSize is the BMP's file total size in bytes, whereas BITMAPINFOHEADER::biSize
+       is the size of the BITMAPINFOHEADER struct which is always 40 bytes.
+    
+11. Q: What does it mean if biHeight is negative?
+    A: if biHeight is negative, that means BMP's origin is going to be at the top left corner,
+       whereas positive biHeight would mean the origin of the image file is at the bottom left 
+       corner.
+    
+12. Q: What field in BITMAPINFOHEADER specifies the BMP’s color depth (i.e., bits per pixel)?
+    A: BITMAPINFOHEADER::biBitCount field specifies the BMP's color depth in bits per pixel.
+    
+13. Q: Why might fopen return NULL in copy.c:37?
+    A: fopen might fail to create a file for writing if, for example, there is no memory
+       available to accommodate our file.
+    
+14. Q: Why is the third argument to fread always 1 in our code?
+    A: The third argument to fread(...) designates how many blocks/chunks of data you want 
+       to read. This is useful when dealing with arrays, where we could, for instance, pass
+       n to the third argument where n is the length of our array.
+    
+15. Q: What value does copy.c:70 assign padding if bi.biWidth is 3?
+    A: The value of 3
+    
+16. Q: What does fseek do?
+    A: fseek moves the stream pointer a number of bytes that was explicitly passed 
+       by the caller using one of the three reference points. Integer constants SEEK_CUR, 
+       SEEK_SET and SEEK_END. SEEK_CUR would use current position indicator as a reference 
+       point, SEEK_SET would use the beginning of a stream as a reference and finally 
+       SEEK_END would be the end of the function. The latter, however, is not standardized, 
+       and it is recommended against its use.
+    
+17. Q: What is SEEK_CUR?
+    A: SEEK_CUR is basically a constant defined in <stdio.h> which is one of the three
+       constants that can be passed to the fseek function. The other two being
+       SEEK_SET and SEEK_END. SEEK_CUR has fseek function calculate offset in bytes 
+       starting at the current pointer position in the stream. SEEK_END would calculate 
+       offset starting from the end of the stream, however SEEK_END is not standardized 
+       and should not be used. SEEK_SET would calculate offset in bytes starting from 
+       the beginning of the stream.
+    
+18. Q: Whodunit?
+    A: The butler did it!..err... I mean... Sjdl Btumfz *cough* yeltsA kciR *cough*
+       *whisper* Rick Astley did it!
+       
+       P.S. Where do I sign up for the FBI Witness Protection Program?
