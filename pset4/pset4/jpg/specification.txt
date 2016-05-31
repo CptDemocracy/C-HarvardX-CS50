@@ -1,0 +1,5 @@
+PROBLEM SPECIFICATION:
+
+In order to solve this problem, I was required to restore photos in format
+.jpg (any of the 15 .jpg format types can be present), from a CF card image, 
+called"card.raw" (should be hardcoded) and output data as images.
