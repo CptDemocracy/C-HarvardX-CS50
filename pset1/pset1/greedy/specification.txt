@@ -1,0 +1,12 @@
+PROBLEM SPECIFICATION:
+
+For this problem I was required to write a program in a file called greedy.c that first 
+asks the user how much change is owed and then displays the minimum number of coins with
+which said change can be made. The specification requested that GetFloat from the CS50 
+Library be used in order to get the user’s input and printf from the Standard I/O library 
+to output the answer. 
+
+PROBLEM ASSUMPTIONS:
+
+For this problem we were allowed to assume that the only coins available are quarters (25¢), 
+dimes (10¢), nickels (5¢), and pennies (1¢).
