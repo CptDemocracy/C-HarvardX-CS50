@@ -4,13 +4,13 @@
 #include <ctype.h>
 #include "cs50.h"
 
-#define ARGC_COUNT_INT				2
-#define CHAR_BUFFER_LENGTH_INT		256
-#define BUFFER_OVERFLOW_MSG_CSTR	"Character buffer encountered an overflow.\n"
-#define INVALID_INPUT_MSG_CSTR		"The syntax of the command is incorrect. Please use ./caesar /? for help\n"
-#define OUTPUT_HELP_CMD_CSTR		"/?"
+#define ARGC_COUNT_INT            2
+#define CHAR_BUFFER_LENGTH_INT        256
+#define BUFFER_OVERFLOW_MSG_CSTR    "Character buffer encountered an overflow.\n"
+#define INVALID_INPUT_MSG_CSTR        "The syntax of the command is incorrect. Please use ./caesar /? for help\n"
+#define OUTPUT_HELP_CMD_CSTR        "/?"
 
-int  encrypt_ascii_caesar   (char*, char*, int, int);
+int  encrypt_ascii_caesar(char*, char*, int, int);
 /**
  * -----------------/ Summary /-----------------------
  * 
@@ -57,7 +57,7 @@ int  encrypt_ascii_caesar   (char*, char*, int, int);
  */
 
 
-bool isLiteralInt           (char*, int);
+bool isLiteralInt(char*, int);
 /**
  * -----------------/ Summary /-----------------------
  * 
@@ -90,7 +90,7 @@ bool isLiteralInt           (char*, int);
  * 
  */
 
-void outputHelp             (void);
+void outputHelp(void);
 /**
  * -----------------/ Summary /-----------------------
  * 
@@ -151,34 +151,34 @@ int main(int argc, char** argv) {
  * 
  */
 
-	if (argc != ARGC_COUNT_INT) {
-		printf(INVALID_INPUT_MSG_CSTR);
-		return 1;
-	}
+    if (argc != ARGC_COUNT_INT) {
+        printf(INVALID_INPUT_MSG_CSTR);
+        return 1;
+    }
 
-	if ( strcmp(argv[ARGC_COUNT_INT - 1], OUTPUT_HELP_CMD_CSTR) == 0) {
-		outputHelp();
-	}
-	else if ( isLiteralInt(argv[ARGC_COUNT_INT - 1], strlen(argv[ARGC_COUNT_INT - 1])) ) {
+    if ( strcmp(argv[ARGC_COUNT_INT - 1], OUTPUT_HELP_CMD_CSTR) == 0) {
+        outputHelp();
+    }
+    else if ( isLiteralInt(argv[ARGC_COUNT_INT - 1], strlen(argv[ARGC_COUNT_INT - 1])) ) {
 
-		int key = atoi(argv[ARGC_COUNT_INT - 1]);
-		char buffer[CHAR_BUFFER_LENGTH_INT];
-		char* input = GetString();
-		int inputLen = strlen(input);
-		if (inputLen + 1 > CHAR_BUFFER_LENGTH_INT){
-			printf(BUFFER_OVERFLOW_MSG_CSTR);
-			return 1;
-		}
-		encrypt_ascii_caesar(input, buffer, inputLen, key);
-		printf("%s\n", buffer);
-		free(input);
-		
-		return 0;
-	} 
-	else {
-		printf(INVALID_INPUT_MSG_CSTR);
-		return 1;
-	}
+        int key = atoi(argv[ARGC_COUNT_INT - 1]);
+        char buffer[CHAR_BUFFER_LENGTH_INT];
+        char* input = GetString();
+        int inputLen = strlen(input);
+        if (inputLen + 1 > CHAR_BUFFER_LENGTH_INT){
+            printf(BUFFER_OVERFLOW_MSG_CSTR);
+            return 1;
+        }
+        encrypt_ascii_caesar(input, buffer, inputLen, key);
+        printf("%s\n", buffer);
+        free(input);
+        
+        return 0;
+    } 
+    else {
+        printf(INVALID_INPUT_MSG_CSTR);
+        return 1;
+    }
 
     return 0;
 }
@@ -236,23 +236,23 @@ int encrypt_ascii_caesar(char* msg, char* buffer, int msgLen, int key) {
     
     int i;
     for (i = 0; i < msgLen; ++i) {
-		char encChar;
+        char encChar;
         if (isalpha(msg[i])) {
             int offset = isupper(msg[i]) ? 'A' : 'a';
             encChar = (msg[i] - offset + key) % (alphaLen + 1) + offset;
         }
-		/*
-		else {
+        /*
+        else {
             buffer[i] = msg[i] + key;   
             // we let it overflow if necessary, in this case it's okay,
             // since we can always retrace it back to its original index
             // in the ascii table.
         }
-		*/
-		else {
-			encChar = msg[i];
-		}
-		buffer[i] = encChar;
+        */
+        else {
+            encChar = msg[i];
+        }
+        buffer[i] = encChar;
     }
     buffer[i] = '\0';
     
@@ -260,18 +260,18 @@ int encrypt_ascii_caesar(char* msg, char* buffer, int msgLen, int key) {
 }
 
 bool isLiteralInt(char* cstr, int len) {
-	if (cstr == NULL) {
-		return false;
-	}
-	if (len <= 0) {
-		return false;
-	}
-	for (int i = 0; i < len; ++i) {
-		if (!isdigit(cstr[i])) {
-			return false;
-		}
-	}
-	return true;
+    if (cstr == NULL) {
+        return false;
+    }
+    if (len <= 0) {
+        return false;
+    }
+    for (int i = 0; i < len; ++i) {
+        if (!isdigit(cstr[i])) {
+            return false;
+        }
+    }
+    return true;
 }
 
 void outputHelp(void) {
