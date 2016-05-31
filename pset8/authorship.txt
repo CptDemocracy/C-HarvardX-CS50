@@ -1,7 +1,25 @@
-My work includes the following units of code:
+My work includes the following units of code. For the most 
+part stubs came with the PSET, I worked on the actual coding.
+The "like" and "my maps" features were implemented by me.
 
 FILE: pset8/includes/helpers.php
 CODE UNITS:
 - generateRandomString($len);
 
-FILE: articles.php
+FILE: pset8/public/articles.php
+FILE: pset8/public/change_password.php
+FILE: pset8/public/favs.php
+FILE: pset8/public/index.php
+FILE: pset8/public/like.php
+FILE: pset8/public/login.php
+FILE: pset8/public/logout.php
+FILE: pset8/public/register.php
+FILE: pset8/public/reset.php
+FILE: pset8/public/search.php
+FILE: pset8/public/update.php
+
+FILE: pset8/public/js/scripts.js
+CODE UNITS:
+- function configure();
+- function addMarker(place);
+- function removeMarkers();
