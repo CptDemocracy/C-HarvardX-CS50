@@ -1,0 +1,17 @@
+My work includes the following units of code:
+
+FILE: pset7/views/apology.php
+FILE: pset7/views/buy_sell_form.php
+FILE: pset7/views/change_password_form.php
+FILE: pset7/views/footer.php
+FILE: pset7/views/greeting.php
+FILE: pset7/views/header.php
+FILE: pset7/views/history_form.php
+FILE: pset7/views/login_form.php
+FILE: pset7/views/password_change_succesful.php
+FILE: pset7/views/portfolio.php
+FILE: pset7/views/quote_form.php
+FILE: pset7/views/quote_summary.php
+FILE: pset7/views/register_form.php
+FILE: pset7/views/reset_form.php
+FILE: pset7/views/reset_successful.php
