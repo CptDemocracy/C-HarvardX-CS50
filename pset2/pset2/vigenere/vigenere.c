@@ -3,13 +3,13 @@
 #include <ctype.h>
 #include "cs50.h"
 
-#define ARGC_COUNT_INT				2
-#define CHAR_BUFFER_LENGTH_INT		256
-#define BUFFER_OVERFLOW_MSG_CSTR	"Character buffer encountered an overflow.\n"
-#define INVALID_KEY_LEN_MSG_CSTR    "Your key's length exceeds the message's length which is illegal.\n"
-#define INVALID_KEY_FORMAT_MSG_CSTR "The key should only contain ASCII alphabetical characters.\n"
-#define INVALID_INPUT_MSG_CSTR		"The syntax of the command is incorrect. Please use ./vigenere /? for help\n"
-#define OUTPUT_HELP_CMD_CSTR		"/?"
+#define ARGC_COUNT_INT                2
+#define CHAR_BUFFER_LENGTH_INT        256
+#define BUFFER_OVERFLOW_MSG_CSTR      "Character buffer encountered an overflow.\n"
+#define INVALID_KEY_LEN_MSG_CSTR      "Your key's length exceeds the message's length which is illegal.\n"
+#define INVALID_KEY_FORMAT_MSG_CSTR   "The key should only contain ASCII alphabetical characters.\n"
+#define INVALID_INPUT_MSG_CSTR        "The syntax of the command is incorrect. Please use ./vigenere /? for help\n"
+#define OUTPUT_HELP_CMD_CSTR          "/?"
 
 
 int  encrypt_ascii_vigenere (char*, char*, int, char*, int);
@@ -69,7 +69,7 @@ int  encrypt_ascii_vigenere (char*, char*, int, char*, int);
  *  
  */
 
-char rotateAlphaChar        (char, int);
+char rotateAlphaChar(char, int);
 /**
  * -----------------/ Summary /------------------------
  * 
@@ -98,7 +98,7 @@ char rotateAlphaChar        (char, int);
  * 
  */
 
-void outputHelp             (void);
+void outputHelp(void);
 /**
  * -----------------/ Summary /-----------------------
  * 
@@ -123,7 +123,7 @@ void outputHelp             (void);
  * 
  */
 
-bool isValidKey             (char*, int);
+bool isValidKey(char*, int);
 /**
  * -----------------/ Summary /-----------------------
  * 
@@ -193,40 +193,40 @@ int main(int argc, char** argv) {
  * 
  */
     
-	if (argc != ARGC_COUNT_INT) {
-		printf(INVALID_INPUT_MSG_CSTR);
-		return 1;
-	}
+    if (argc != ARGC_COUNT_INT) {
+        printf(INVALID_INPUT_MSG_CSTR);
+        return 1;
+    }
 
-	if ( strcmp(argv[ARGC_COUNT_INT - 1], OUTPUT_HELP_CMD_CSTR) == 0) {
-		outputHelp();
-	}
-	else if (isValidKey(argv[ARGC_COUNT_INT - 1], strlen(argv[ARGC_COUNT_INT - 1]))) {
+    if ( strcmp(argv[ARGC_COUNT_INT - 1], OUTPUT_HELP_CMD_CSTR) == 0) {
+        outputHelp();
+    }
+    else if (isValidKey(argv[ARGC_COUNT_INT - 1], strlen(argv[ARGC_COUNT_INT - 1]))) {
 
         char  buffer[CHAR_BUFFER_LENGTH_INT];
         
-		char* key      = argv[ARGC_COUNT_INT - 1];
-		char* input    = GetString();
-		int   inputLen = strlen(input);
-		int   keyLen   = strlen(key);
-		
-		if (inputLen + 1 > CHAR_BUFFER_LENGTH_INT){
-			printf(BUFFER_OVERFLOW_MSG_CSTR);
-			return 1;
-		}
-		if (keyLen > inputLen) {
-		    printf(INVALID_KEY_LEN_MSG_CSTR);
-		    return 1;
-		}
-		encrypt_ascii_vigenere(input, buffer, inputLen, key, keyLen);
-		printf("%s\n", buffer);
-		free(input);
-		
-		return 0;
-	} else {
-	    printf(INVALID_KEY_FORMAT_MSG_CSTR);
-		return 1;
-	}
+        char* key      = argv[ARGC_COUNT_INT - 1];
+        char* input    = GetString();
+        int   inputLen = strlen(input);
+        int   keyLen   = strlen(key);
+        
+        if (inputLen + 1 > CHAR_BUFFER_LENGTH_INT){
+            printf(BUFFER_OVERFLOW_MSG_CSTR);
+            return 1;
+        }
+        if (keyLen > inputLen) {
+            printf(INVALID_KEY_LEN_MSG_CSTR);
+            return 1;
+        }
+        encrypt_ascii_vigenere(input, buffer, inputLen, key, keyLen);
+        printf("%s\n", buffer);
+        free(input);
+        
+        return 0;
+    } else {
+        printf(INVALID_KEY_FORMAT_MSG_CSTR);
+        return 1;
+    }
 
     return 0;
 }
@@ -263,15 +263,15 @@ int encrypt_ascii_vigenere(char* msg,
     
     int i, j;
     for (i = 0, j = 0; i < msgLen; ++i) {
-		char letter = msg[i];
+        char letter = msg[i];
         if (isalpha(letter)) {
-			int offset = isupper(key[j]) ? 'A' : 'a';
+            int offset = isupper(key[j]) ? 'A' : 'a';
             buffer[i] = rotateAlphaChar(letter, (int) (key[j] - offset));
-			j = (j + 1) % keyLen;
+            j = (j + 1) % keyLen;
         }
-		else {
-			buffer[i] = letter;
-		}
+        else {
+            buffer[i] = letter;
+        }
     }
     buffer[i] = '\0';
     
