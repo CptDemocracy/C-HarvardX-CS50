@@ -1,0 +1,16 @@
+PROBLEM SPECIFICATION:
+
+In whodunit.c, my assignment was to write a program that will remove the red
+noise in clue.bmp, (that comes with the PSET) and thus reveal the identity
+of the person in clue.bmp.
+
+For resize.c, my job was to create a program that works from the console,
+and resizes a bmp file by a factor specified by the user. The usage would
+look like the one below:
+  ./resize n infile outfile
+Where:
+- n is the multiplication factor, 
+- infile is the file we are to enlarge
+- outfile is the enlarged bmp file.
+Notice, however, that infile and outfile have to be two separate instances,
+if this is not the case, resize does not support such conversion.
