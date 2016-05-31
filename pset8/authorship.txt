@@ -1,6 +1,6 @@
 My work includes the following units of code. For the most 
 part stubs came with the PSET, I worked on the actual coding.
-The "like" and "my maps" features were implemented by me.
+The "like" and the "my places" features were implemented by me.
 
 FILE: pset8/includes/helpers.php
 CODE UNITS:
