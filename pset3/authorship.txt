@@ -19,7 +19,7 @@ however the actual code was written by me:
 - bool move(int tile);
 - bool won(void);
 
-FILE: pset3/fifteen/questions.txt
+FILE: pset3/questions.txt
 
 FILE: pset3/find/helpers.c
 CODE UNITS:
