@@ -1,0 +1,5 @@
+PROBLEM SPECIFICATION:
+The problem I was required to write, in a file called water.c, a program that prompts the user for the length of his or her shower in minutes (as a positive integer) and then prints the equivalent number of bottles of water (as an integer) per the sample output below, wherein underlined text represents some user’s input.
+
+PROBLEM ASSUMPTIONS:
+For simplicity, you may assume that the user will input a positive integer, so no need for error-checking (or any loops) this time! And no need to worry about overflow!
