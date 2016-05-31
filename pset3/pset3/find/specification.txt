@@ -1,0 +1,4 @@
+PROBLEM SPECIFICATION:
+
+For this problem I was required to re-write the search function to find in such a way that it uses binary search, 
+returning true if value provided by the user is in values and false if value is not in values.
