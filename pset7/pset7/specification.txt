@@ -1,0 +1,35 @@
+PROBLEM SPECIFICATION:
+
+For PSET 7, I was required to implement register.php
+which would enable users to register on the website,
+provided by the PSET. 
+
+I was then required to empower users to look up quotes
+for individual stocks by implementing a controller 
+quote.php and two new HTML views, via which a user can
+submit a stock's symbol and the second view, which displays
+minimally the stock's latest price. (if passed an appropriate
+value for the stock symbol).
+
+My third assignment for this PSET was implementation of
+a database to keep track of users' portfolios (collections
+of stocks) that a registered user owns.
+
+When all solutions to the problems listed above were presented,
+I was required to implement the sell, buy and history functionalities,
+which would enable our users to sell stocks, buy stocks, and watch
+their stock trading history respectively.
+
+As the icing on the cake, my final assignment for this PSET was
+implementation of an extra feature, either empowering users, who
+are already logged in to change their passwords, or implementing
+a functionality that would enable users to deposit additional funds.
+My choice was the password reset feature.
+
+P.S. Fun trivia. I was actually writing this specification in my 
+own words, as opposed to copy/pasting the PSET requirements off 
+of their respective pages. For the last paragraph of my specification, 
+willing to detract from the conventional "My nth assignment was to...", 
+I decided to use "As the icing on the cake..." to begin my first sentence. 
+How surprised I was to discover that the last paragraph in the original 
+PSET spec started with "And ow the icing on the cake..."!
