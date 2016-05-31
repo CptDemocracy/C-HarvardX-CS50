@@ -1,0 +1,9 @@
+PROBLEM SPECIFICATION:
+
+For this problem I was required to write, in a file called mario.c, a program that 
+recreates a half-pyramid using hashes (#) for blocks. The first prompt to the user
+was for the half-pyramid’s height - a non-negative integer no greater than 23. 
+If the user fails to provide a non-negative integer no greater than 23, my program
+should re-prompt for the same again. Then, generate (with the help of printf and one
+or more loops) the desired half-pyramid. I had to take care to align the bottom-left 
+corner of the half-pyramid with the left-hand edge of the user's terminal window.
