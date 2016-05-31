@@ -1,0 +1,1 @@
+<div class="jumbotron"><?=htmlspecialchars($message);?></div>
