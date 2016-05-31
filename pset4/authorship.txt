@@ -21,7 +21,3 @@ CODE UNITS:
 FILE: pset4/bmp/resize.c
 CODE UNITS:
 - int main(int argc, char** argv);
-
-COMMENT:
-The prototypes for the following code units were supplied with the PSET specification, 
-however the actual code was written by me:
