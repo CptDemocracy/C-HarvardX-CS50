@@ -1,0 +1,12 @@
+PROBLEM SPECIFICATION:
+
+For this problem, I was required to implement a data structure (whether
+a hash table or a trie) to hold a word dictionary in a manner that will
+enable the quickest possible access by the spell-checker provided by the 
+CS50. I chose the data structure to be a hash table since I was more 
+familiar with a hash table and believed that, despite the worst-case
+O(n^2) for search, a good hashing algorithm would ensure the average-case
+scenario which is O(1). 
+
+As part of the hash table implementation, I also implemented my own hashing
+function.
