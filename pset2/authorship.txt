@@ -1,0 +1,21 @@
+My work includes the following units of code:
+
+FILE: caesar/caesar.c
+CODE UNITS:
+- int encrypt_ascii_caesar(char*, char*, int, int);
+- bool isLiteralInt(char*, int);
+- void outputHelp(void);
+- int main(int argc, char** argv);
+
+FILE: initials/initials.c
+CODE UNITS:
+- int outputInitials(const char*, const int);
+- int main(int argc, char** argv);
+
+FILE: vigenere/vigenere.c
+CODE UNITS:
+- int encrypt_ascii_vigenere(char*, char*, int, char*, int);
+- char rotateAlphaChar(char, int);
+- void outputHelp(void);
+- bool isValidKey(char*, int);
+- int main(int argc, char** argv);
