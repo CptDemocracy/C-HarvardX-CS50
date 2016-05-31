@@ -1,0 +1,19 @@
+My work includes the following units of code:
+
+FILE: greedy/greedy.c
+CODE UNITS:
+- int calculateMinCoinCountForChangeUSD(float changeOwedUsd);
+
+FILE: hello/hello.c
+CODE UNITS:
+- int main(void);
+
+FILE: mario/mario.c
+CODE UNITS:
+- void drawPyramid(char block, int height);
+- int main(void);
+
+FILE: water/water.c
+CODE UNITS:
+- int GetPositiveInt(void);
+- int main(void);
