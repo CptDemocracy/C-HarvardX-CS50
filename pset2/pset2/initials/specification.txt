@@ -1,0 +1,10 @@
+PROBLEM SPECIFICATION:
+
+For this problem I was required to Write, in a file called initials.c, a program 
+that prompts a user for their name (using GetString from the CS50 Library) and then 
+outputs their initials in uppercase with no spaces or periods, followed by a newline (\n).
+
+PROBLEM ASSUMPTIONS:
+
+You may assume that the user’s input will contain only letters (uppercase and/or lowercase) 
+plus single spaces between words.
