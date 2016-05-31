@@ -6,5 +6,5 @@ PLEASE NOTE. A NOTE ON AUTHORSHIP:
 Since most PSETs were provided with helper code which I assume no authorship of, every
 PSET folder will contain a file, called:
   "authorship.txt"
-which will indicate what code is my solution to the problem and what code is helper
+, which will indicate what code is my solution to the problem and what code is helper
 code that belongs solely to the people at the CS50.
