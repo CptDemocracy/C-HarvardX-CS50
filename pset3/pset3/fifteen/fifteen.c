@@ -27,8 +27,8 @@
 #define DIM_MAX 9
 
 // !extra constants
-#define EMPTY_TILE_INT			            0
-#define INT_TO_STR_CHAR_BUFFER_SIZE_INT	    128
+#define EMPTY_TILE_INT                0
+#define INT_TO_STR_CHAR_BUFFER_SIZE_INT        128
 
 // board
 int board[DIM_MAX][DIM_MAX];
@@ -197,7 +197,7 @@ void init(void)
  */
 void draw(void)
 {
-	char buffer[INT_TO_STR_CHAR_BUFFER_SIZE_INT];
+    char buffer[INT_TO_STR_CHAR_BUFFER_SIZE_INT];
 
     int num;
     for (int row = 0; row < d; ++row) {
@@ -244,18 +244,18 @@ bool move(int tile)
                
                 for (int i = 0; i < 2; ++i) {
                     if (horizontalCoords[i] >= 0 && horizontalCoords[i] < d && board[row][horizontalCoords[i]] == EMPTY_TILE_INT) {
-						int temp						= board[row][col];
-						board[row][col]					= board[row][horizontalCoords[i]];
-						board[row][horizontalCoords[i]] = temp;
-						return true;
+                        int temp                        = board[row][col];
+                        board[row][col]                 = board[row][horizontalCoords[i]];
+                        board[row][horizontalCoords[i]] = temp;
+                        return true;
                     }
                 }
                 for (int i = 0; i < 2; ++i) {
                     if (verticalCoords[i] >= 0 && verticalCoords[i] < d && board[verticalCoords[i]][col] == EMPTY_TILE_INT) {
-						int temp						= board[row][col];
-						board[row][col]					= board[verticalCoords[i]][col];
-						board[verticalCoords[i]][col]	= temp;
-						return true;
+                        int temp                        = board[row][col];
+                        board[row][col]                 = board[verticalCoords[i]][col];
+                        board[verticalCoords[i]][col]   = temp;
+                        return true;
                     }
                 }
 
@@ -273,18 +273,17 @@ bool move(int tile)
  */
 bool won(void)
 {
-
-	if (board[d - 1][d - 1] != EMPTY_TILE_INT) {
-		return false;
-	}
-	int lastTileValue = board[0][0];
-	for (int row = 0; row < d; ++row) {
-		for (int col = 0; col < d; ++col) {
-			if (board[row][col] != EMPTY_TILE_INT && board[row][col] < lastTileValue) {
-				return false;
-			}
-			lastTileValue = board[row][col];
-		}
-	}
+    if (board[d - 1][d - 1] != EMPTY_TILE_INT) {
+        return false;
+    }
+    int lastTileValue = board[0][0];
+    for (int row = 0; row < d; ++row) {
+        for (int col = 0; col < d; ++col) {
+            if (board[row][col] != EMPTY_TILE_INT && board[row][col] < lastTileValue) {
+                return false;
+            }
+            lastTileValue = board[row][col];
+        }
+    }
     return true;
 }
