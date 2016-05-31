@@ -1,0 +1,23 @@
+My work includes the following units of code:
+
+FILE: pset3/fifteen/fifteen.c
+CODE UNITS:
+- int main(int argc, char* argv[]);
+- void clear(void);
+- void greet(void);
+- void init(void);
+- void draw(void);
+- bool move(int tile);
+- bool won(void);
+
+FILE: pset3/fifteen/questions.txt
+
+COMMENT:
+The prototypes for the following code units were supplied with the PSET specification, 
+however the actual code was written by me:
+- void clear(void);
+- void greet(void);
+- void init(void);
+- void draw(void);
+- bool move(int tile);
+- bool won(void);
