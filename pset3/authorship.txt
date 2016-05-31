@@ -9,9 +9,6 @@ CODE UNITS:
 - void draw(void);
 - bool move(int tile);
 - bool won(void);
-
-FILE: pset3/fifteen/questions.txt
-
 COMMENT:
 The prototypes for the following code units were supplied with the PSET specification, 
 however the actual code was written by me:
@@ -21,3 +18,15 @@ however the actual code was written by me:
 - void draw(void);
 - bool move(int tile);
 - bool won(void);
+
+FILE: pset3/fifteen/questions.txt
+
+FILE: pset3/find/helpers.c
+CODE UNITS:
+- bool search(int value, int values[], int n);
+- void sort(int values[], int n);
+COMMENT:
+The prototypes for the following code units were supplied with the PSET specification, 
+however the actual code was written by me:
+- bool search(int value, int values[], int n);
+- void sort(int values[], int n);
