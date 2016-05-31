@@ -1,18 +1,18 @@
 My work includes the following units of code:
 
-FILE: caesar/caesar.c
+FILE: pset2/caesar/caesar.c
 CODE UNITS:
 - int encrypt_ascii_caesar(char*, char*, int, int);
 - bool isLiteralInt(char*, int);
 - void outputHelp(void);
 - int main(int argc, char** argv);
 
-FILE: initials/initials.c
+FILE: pset2/initials/initials.c
 CODE UNITS:
 - int outputInitials(const char*, const int);
 - int main(int argc, char** argv);
 
-FILE: vigenere/vigenere.c
+FILE: pset2/vigenere/vigenere.c
 CODE UNITS:
 - int encrypt_ascii_vigenere(char*, char*, int, char*, int);
 - char rotateAlphaChar(char, int);
