@@ -13,8 +13,8 @@ int outputInitials(const char*, const int);
  * -----------------/ Arguments /-----------------
  * 
  *  name : const char* - the full name containing alphabetic characters,
- * 						 however alphanumeric entries will be accepted 
- * 						 as well.
+ *                       however alphanumeric entries will be accepted 
+ *                       as well.
  * 
  *  count : const int  - the number of characters in the name.
  * 
@@ -47,11 +47,11 @@ int main(int argc, char** argv) {
  * 
  * -----------------/ Arguments /-----------------
  * 
- *  argc : int 		- the number of arguments entered by a user.
- *               	  Ignored for this program.
+ *  argc : int         - the number of arguments entered by a user.
+ *                     Ignored for this program.
  * 
- *  argv : char** 	- the array of commands entered by a user.
- *               	  Ignored for this program.
+ *  argv : char**     - the array of commands entered by a user.
+ *                     Ignored for this program.
  * 
  * -----------------/ Pre-condition /-----------------
  * 
@@ -76,25 +76,25 @@ int main(int argc, char** argv) {
 
 
 int outputInitials(const char* name, const int count) {
-	if (name == NULL) {
-		return 1;
-	}
-	if (count < 0) {
-		return 1;
-	}
-	
-	bool isWhitespaceFound = true;
-	
-	for (int i = 0; i < count; ++i) {
-	    char letter = name[i];
-		if (isWhitespaceFound) {
-			printf("%c", toupper(letter));
-			isWhitespaceFound = false;
-		}
-		if (isblank(letter)) {
-			isWhitespaceFound = true;
-		}
-	}
-	printf("\n");
-	return 0;
+    if (name == NULL) {
+        return 1;
+    }
+    if (count < 0) {
+        return 1;
+    }
+    
+    bool isWhitespaceFound = true;
+    
+    for (int i = 0; i < count; ++i) {
+        char letter = name[i];
+        if (isWhitespaceFound) {
+            printf("%c", toupper(letter));
+            isWhitespaceFound = false;
+        }
+        if (isblank(letter)) {
+            isWhitespaceFound = true;
+        }
+    }
+    printf("\n");
+    return 0;
 }
