@@ -1,0 +1,13 @@
+Woah, now this one's a biggie. The majory of code was provided by the CS50, and
+also includes the backbone of the server, which I assume no authorship of.
+Below are listed the parts that I actually worked on to meet the PSET requirements:
+
+FILE: pset6/server.c
+CODE UNITS:
+- char* indexes(const char* path);
+- bool load(FILE* file, BYTE** content, size_t* length);
+- const char* lookup(const char* path);
+- bool parse(const char* line, char* path, char* query);
+COMMENT:
+The functions listen in CODE UNITS that I worked on, had pre-supplied prototypes, 
+however the actual code was written by me.
