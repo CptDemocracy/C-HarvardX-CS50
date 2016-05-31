@@ -1,0 +1,7 @@
+My work includes the following units of code:
+
+FILE: pset8/includes/helpers.php
+CODE UNITS:
+- generateRandomString($len);
+
+FILE: articles.php
