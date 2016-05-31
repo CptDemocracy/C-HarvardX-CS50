@@ -1,4 +1,8 @@
 PROBLEM SPECIFICATION:
 
-For this problem I was required to re-write the search function to find in such a way that it uses binary search, 
-returning true if value provided by the user is in values and false if value is not in values.
+For this problem I was required to re-write the search function in declared helpers.h to find 
+in such a way that it uses binary search, returning true if value provided by the user is in 
+values and false if value is not in values.
+
+Then my job was to write a sorting function, also declared in helpers.h, so that it has a time
+complexity of O(n^2). I chose the Shellsort algorithm (en.wikipedia.org/wiki/Shellsort).
