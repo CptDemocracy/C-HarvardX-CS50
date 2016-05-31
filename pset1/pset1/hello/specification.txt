@@ -1,0 +1,4 @@
+PROBLEM SPECIFICATION:
+
+For this problem I was required to write a program that simply says "Hello world",
+and try hard to not get ashamed of it.
