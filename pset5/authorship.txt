@@ -1,0 +1,56 @@
+My work includes the following units of code:
+
+FILE: pset5/questions.txt
+
+FILE: pset5/HashSet.h
+CODE UNITS:
+- * // entire file is my work
+
+FILE: pset5/HashSet.c
+CODE UNITS:
+- * // entire file is my work
+
+FILE: pset5/List.h
+CODE UNITS:
+- * // entire file is my work
+
+FILE: pset5/List.c
+CODE UNITS:
+- * // entire file is my work
+
+FILE: pset5/PrimeHelper.h
+CODE UNITS:
+- * // entire file is my work
+COMMENT:
+This file was written by me, however, it is actually a port from the .NET Framework.
+I can only assume credit for porting it into C to meet the PSET's needs.
+
+FILE: pset5/PrimeHelper.c
+CODE UNITS:
+- * // entire file is my work
+COMMENT:
+This file was written by me, however, it is actually a port from the .NET Framework.
+I can only assume credit for porting it into C to meet the PSET's needs.
+
+FILE: pset5/Slot.h
+CODE UNITS:
+- * // entire file is my work
+
+FILE: pset5/Slot.c
+CODE UNITS:
+- * // entire file is my work
+
+FILE: dictionary.c
+CODE UNITS:
+- bool check(const char* word);
+- long fsize(FILE* file);
+- bool load(const char* dictionary);
+- unsigned int size(void);
+- bool unload(void);
+COMMENT:
+The prototypes for the following code units were supplied with the PSET specification, 
+however the actual code was written by me:
+- bool check(const char* word);
+- bool load(const char* dictionary);
+- unsigned int size(void);
+- bool unload(void);
